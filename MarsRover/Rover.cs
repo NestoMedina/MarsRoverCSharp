@@ -20,28 +20,30 @@ namespace MarsRover
         {
             foreach(Command item in messages.Commands)
             {
-                /*if (item.CommandType != "MOVE" || item.CommandType != "MODE_CHANGE")
+                if (item.CommandType != "MOVE" && item.CommandType != "MODE_CHANGE")
                 {
-                    Console.WriteLine("Unknown Command");
-                    break;
-                } */
+                    Console.WriteLine("WARNING UNKNOWN COMMAND");
+                } 
                 if (item.CommandType == "MOVE")
                 {
                     if (this.Mode == "LOW_POWER")
                     {
-                        const string i = "WARNING ROVER IN LOW_POWER. MOVEMENT NOT POSSIBLE";
-                        throw new InvalidOperationException(i);
+                       Console.WriteLine("WARNING ROVER IN LOW_POWER. MOVEMENT NOT POSSIBLE");
+                       break;
                     }
                     Position = item.NewPostion;
                     GeneratorWatts = 110;
                 }
                 else if (item.CommandType == "MODE_CHANGE")
                 {
-                    Mode = item.NewMode;
-                    if (item.NewMode == "LOW_POWER" || this.Mode == "LOW_POWER")
+                    this.Mode = item.NewMode;
+                    if (item.NewMode == "LOW_POWER")
                     {
-                       const string i = "WARNING ROVER IN LOW_POWER. MOVEMENT NOT POSSIBLE";
-                        throw new InvalidOperationException(i);
+                        Console.WriteLine("WARNING ROVER IN LOW_POWER.MOVEMENT NOT POSSIBLE");
+                    }
+                    else if (item.NewMode == "NORMAL")
+                    {
+                        this.Mode = item.NewMode;
                     }
                 }
             }
