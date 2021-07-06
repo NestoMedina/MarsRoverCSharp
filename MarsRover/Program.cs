@@ -23,10 +23,14 @@ namespace MarsRover
             myRover2.ReceiveMessage(newMessage2);
             Console.WriteLine(myRover2.ToString());
 
-
+            Console.WriteLine("<---------------------------->");
+            Command[] newOrders5 = new Command[] { new Command("MODE_CHANGE", "NORMAL") };
+            Message newMessage5 = new Message("Update4: From Houston", newOrders5);
+            myRover2.ReceiveMessage(newMessage5);
+            Console.WriteLine(myRover2.ToString());
 
             Console.WriteLine("<---------------------------->");
-            Command[] newOrders3 = new Command[] { new Command("MODE_CHANGE", "NORMAL") };
+            Command[] newOrders3 = new Command[] { new Command("MOV12E", 125) };
             Message newMessage3 = new Message("Update4: From Houston", newOrders3);
             myRover2.ReceiveMessage(newMessage3);
             Console.WriteLine(myRover2.ToString());

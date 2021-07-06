@@ -45,14 +45,8 @@ namespace MarsRoverTests
             Command[] newOrders = new Command[] { new Command("MODE_CHANGE", "LOW_POWER"), new Command("MOVE", 300)};
             Message newMessage = new Message("Update2: From Houston", newOrders);
             Rover test = new Rover(200);
-            try
-            {
-                test.ReceiveMessage(newMessage);
-            }
-            catch (InvalidOperationException j)
-            {
-                Assert.AreEqual("WARNING ROVER IN LOW_POWER. MOVEMENT NOT POSSIBLE", j.Message);
-            }
+            test.ReceiveMessage(newMessage);
+            Assert.AreEqual(test.Position, 200);
         }
 
         [TestMethod]
@@ -72,6 +66,7 @@ namespace MarsRoverTests
             Message newMessage = new Message("Update4: From Houston", newOrders);
             Rover test = new Rover(200);
             test.ReceiveMessage(newMessage);
+            Assert.AreEqual(test.ReceiveMessage(newMessage), "WARNING UNKNOWN COMMAND"); 
             
         }
 

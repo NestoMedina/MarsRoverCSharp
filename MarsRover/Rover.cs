@@ -16,13 +16,16 @@ namespace MarsRover
         }
 
 
-       public void ReceiveMessage(Message messages)
+       public string ReceiveMessage(Message messages)
         {
+            string update = "";
             foreach(Command item in messages.Commands)
             {
                 if (item.CommandType != "MOVE" && item.CommandType != "MODE_CHANGE")
                 {
-                    Console.WriteLine("WARNING UNKNOWN COMMAND");
+                    string warning = "WARNING UNKNOWN COMMAND";
+                    Console.WriteLine(warning);
+                    update = warning;
                 } 
                 if (item.CommandType == "MOVE")
                 {
@@ -47,6 +50,7 @@ namespace MarsRover
                     }
                 }
             }
+            return update;
 
         } 
 
