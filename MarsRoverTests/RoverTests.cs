@@ -18,14 +18,14 @@ namespace MarsRoverTests
         [TestMethod]
         public void ConstructorSetsDefaultMode()
         {
-            Rover test = new Rover("NORMAL");
+            Rover test = new Rover(200);
             Assert.AreEqual(test.Mode, "NORMAL");
         }
 
         [TestMethod]
         public void ConstructorSetsDefaultGeneratorWatts() //test10
         {
-            Rover test = new Rover("NORMAL", 110);
+            Rover test = new Rover(200);
             Assert.AreEqual(test.GeneratorWatts, 110);
         }
 
@@ -34,7 +34,7 @@ namespace MarsRoverTests
         {
             Command[] newOrders = new Command[] { new Command("MODE_CHANGE", "NORMAL") };
             Message newMessage = new Message("Update1: From Houston", newOrders);
-            Rover test = new Rover();
+            Rover test = new Rover(200);
             test.ReceiveMessage(newMessage);
             Assert.AreEqual(test.Mode, "NORMAL");
         }
@@ -44,7 +44,7 @@ namespace MarsRoverTests
         {
             Command[] newOrders = new Command[] { new Command("MODE_CHANGE", "LOW_POWER"), new Command("MOVE", 300)};
             Message newMessage = new Message("Update2: From Houston", newOrders);
-            Rover test = new Rover();
+            Rover test = new Rover(200);
             try
             {
                 test.ReceiveMessage(newMessage);
@@ -60,25 +60,19 @@ namespace MarsRoverTests
         {
             Command[] newOrders = new Command[] { new Command("MOVE", 750), new Command("MOVE", 300) };
             Message newMessage = new Message("Update3: From Houston", newOrders);
-            Rover test = new Rover();
+            Rover test = new Rover(200);
             test.ReceiveMessage(newMessage);
             Assert.AreEqual(test.Position, 300);
         }
 
-        [TestMethod] // rework this portion
+        [TestMethod] 
         public void RoverReturnsAMessageForAnUnkownCommand()
         {
             Command[] newOrders = new Command[] { new Command("ReverseBackItUpDropDownLow", 360)};
             Message newMessage = new Message("Update4: From Houston", newOrders);
-            Rover test = new Rover();
-            try
-            {
-                test.ReceiveMessage(newMessage);
-            }
-            catch (InvalidOperationException j)
-            {
-                Assert.AreEqual("UNKOWN COMMAND", j.Message);
-            }
+            Rover test = new Rover(200);
+            test.ReceiveMessage(newMessage);
+            
         }
 
 

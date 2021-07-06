@@ -20,10 +20,10 @@ namespace MarsRover
         {
             foreach(Command item in messages.Commands)
             {
-               /* if (item.CommandType != "MOVE" || item.CommandType != "MODE_CHANGE")
+                /*if (item.CommandType != "MOVE" || item.CommandType != "MODE_CHANGE")
                 {
-                    const string i = "UNKOWN COMMAND";
-                    throw new InvalidOperationException(i);
+                    Console.WriteLine("Unknown Command");
+                    break;
                 } */
                 if (item.CommandType == "MOVE")
                 {
@@ -53,39 +53,7 @@ namespace MarsRover
             return "Position: " + Position + " - Mode: " + Mode + " - GeneratorWatts: " + GeneratorWatts; 
         }
 
-        public Rover()
-        {
-        }
 
-
-
-
-
-
-
-        public Rover(string mode)
-        {
-            Mode = mode;
-        }
-
-        public Rover(string mode, int watts)
-        {
-            if (mode == "NORMAL")
-            {
-                Mode = mode;
-                GeneratorWatts = watts;
-            }
-            else if (mode == "LOW_POWER")
-            {
-                Mode = mode;
-            }
-        }
-        public Rover(string mode, int position, int watts)
-        {
-            Mode = mode;
-            Position = position;
-            GeneratorWatts = watts;
-        }
 
 
     }
